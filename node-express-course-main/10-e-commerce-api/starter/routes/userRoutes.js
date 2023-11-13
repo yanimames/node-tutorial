@@ -10,7 +10,7 @@ const  {  getAllUsers,
 } = require('../controllers/userController');
 const { update } = require('lodash');
 
-router.route('/').get(authenticateUser, authorizePermissions, getAllUsers);
+router.route('/').get(getAllUsers);
 
 router.route('/showMe').get(showCurrentUser)
 router.route('/updateUser').patch(updateUser)

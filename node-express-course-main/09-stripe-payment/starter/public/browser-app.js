@@ -6,7 +6,7 @@ const total_amount = 10998;
 const shipping_fee = 1099;
 
 var stripe = Stripe(
-  'pk_test_51I87djFp5pnuKUXgBVIHiR36vVAWyfuyb7ckrhgyDNA1kM0GWHas9ZGUAgwJSFNUxrbyE6NwlMNmls1iGSfzHDdE00DQB3y6AH'
+  'pk_test_51NTUwpFHFdOlsVZsAR3KmHwO0af1MYOIaFKYpHOj26styjRovcR3ag05YKrocnda27Wbpx6Gi0FTpJ2hCsKe8HD5002u50OAQ8'
 );
 
 // The items the customer wants to buy
@@ -59,6 +59,7 @@ fetch('/stripe', {
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       // Complete payment when the submit button is clicked
+      console.log(data.clientSecret)
       payWithCard(stripe, card, data.clientSecret);
     });
   });

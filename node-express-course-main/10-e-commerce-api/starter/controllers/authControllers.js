@@ -30,17 +30,18 @@ const login = async (req,res) =>{
     const user = await User.findOne({ email })
 
     if(!user){
-        throw new CustomError.UnauthenticatedError('Invalid credentials');
+     throw new CustomError.UnauthenticatedError('Invalid credentials');
     }
 
     const isPasswordCorrect = await user.comparePassword(password);
     if(!isPasswordCorrect){
-        throw new CustomError.UnauthenticatedError('Invalid credentials');
+       throw new CustomError.UnauthenticatedError('Invalid credentials');
     }
 
     const tokenUser = {name:user.name, userId: user._id, role: user.role}
     attachCookiesToResponse({res, user:tokenUser})
-    res.status(StatusCodes.CREATED).json({user:tokenUser })
+    res.status(StatusCodes.OK).json({user:tokenUser })
+    //res.status(Statuscode.OK).json({ user: tokenUser )};
 };
 const logout = async (req,res) => {
     res.cookie('token','logout', {
