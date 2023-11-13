@@ -2,6 +2,8 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { UnauthenticatedError } = require('../errors')
 
+
+
 const auth = async (req, res, next) => {
   // check header
   const authHeader = req.headers.authorization
@@ -13,11 +15,14 @@ const auth = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET)
     // attach the user to the job routes
-    req.user = { userId: payload.userId, name: payload.name }
-    next()
+    const testUser = payload.userId === '64a85a128ae4e62354adb93a'
+    //64a85a128ae4e62354adb93a
+    req.user = { userId: payload.userId, testUser }
+    next();
   } catch (error) {
-    throw new UnauthenticatedError('Authentication invalid')
+    throw new BadRequestError('Authentication invalid')
   }
 }
+
 
 module.exports = auth

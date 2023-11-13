@@ -8,6 +8,8 @@ const authenticationMiddleware = async (req, res, next) => {
     throw new UnauthenticatedError('No token provided')
   }
 
+
+  console.log(authHeader)
   const token = authHeader.split(' ')[1]
 
   try {
